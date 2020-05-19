@@ -1,0 +1,40 @@
+<div class="footer-menu tablet-6 mobile-3 footer-sect">
+   <h6>{{ block.settings.title | escape }} <span class="ftoggle plus"></span></h6>
+   <div class="atoggle">
+      <ul>
+        {% for link in linklists[block.settings.footer_nav].links %}
+        <li>{{ link.title | link_to: link.url }}</li>
+        {% endfor %}
+      </ul>
+   </div>
+</div>
+
+<style>
+  @media (max-width: 980px) {
+    span.ftoggle {
+      background-size: cover;
+      display: block;
+      width: 17px;
+      height: 17px;
+      float: right;
+    }
+    span.ftoggle.plus {
+      background-image: url({{'plus-thin.png' | asset_url}});
+    }
+    span.ftoggle.minus {
+      background-image: url({{'minus-thin.png' | asset_url}});
+    }
+  }
+</style>
+<script type="text/javascript">
+  var check  = function() { return $(window).width() <=980 }
+  if (check()) { $('.atoggle').hide(); } else { $('.atoggle').show(); }
+  $('.ftoggle').click(function() {
+    if (check()) {
+      $(this).toggleClass(function(){
+        return $(this).is('.plus, .minus') ? 'plus minus' : 'plus';
+      });
+      $(this).parent().next('.atoggle').slideToggle();
+    }
+  });
+</script>
